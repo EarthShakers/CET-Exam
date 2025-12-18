@@ -1,24 +1,19 @@
-import { auth } from "@/auth"
-import { redirect } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { LogOut, Plus } from "lucide-react"
-import { signOut } from "@/auth"
-
-async function handleSignOut() {
-  "use server"
-  await signOut()
-}
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Plus } from "lucide-react";
+import { SignOutButton } from "@/components/sign-out-button";
 
 export default async function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  const session = await auth()
+  const session = await auth();
 
   if (!session) {
-    redirect("/login")
+    redirect("/login");
   }
 
   return (
@@ -28,7 +23,9 @@ export default async function DashboardLayout({
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Link href="/dashboard">
-                <h1 className="text-2xl font-bold text-gray-900">CET 考试系统</h1>
+                <h1 className="text-2xl font-bold text-gray-900">
+                  CET 考试系统
+                </h1>
               </Link>
             </div>
             <div className="flex items-center space-x-4">
@@ -41,12 +38,7 @@ export default async function DashboardLayout({
                   创建考试
                 </Button>
               </Link>
-              <form action={handleSignOut}>
-                <Button variant="outline" type="submit">
-                  <LogOut className="h-4 w-4 mr-2" />
-                  退出
-                </Button>
-              </form>
+              <SignOutButton />
             </div>
           </div>
         </div>
@@ -55,6 +47,5 @@ export default async function DashboardLayout({
         {children}
       </main>
     </div>
-  )
+  );
 }
-

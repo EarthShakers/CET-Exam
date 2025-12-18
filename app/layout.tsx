@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"
 import { Toaster as Sonner } from "sonner"
+import { Providers } from "@/components/providers"
 
 export const metadata: Metadata = {
   title: "CET 考试系统",
@@ -16,9 +17,11 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body>
-        {children}
-        <Toaster />
-        <Sonner />
+        <Providers>
+          {children}
+          <Toaster />
+          <Sonner />
+        </Providers>
       </body>
     </html>
   );
